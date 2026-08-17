@@ -1,5 +1,6 @@
 const express = require('express');
 const sequelize = require('./config/database.js');
+const User = require('./models/user.js');
 
 const app = express();
 
@@ -18,6 +19,9 @@ async function startServer() {
     try {
         await sequelize.authenticate();
         console.log('Conexão com o banco de dados estabelecida com sucesso.');
+
+         await sequelize.sync();
+        console.log('Tabelas sincronizadas.');
 
         app.listen(PORT, () => {
             console.log(`Servidor rodando na porta ${PORT}`);
