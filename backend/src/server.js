@@ -1,10 +1,12 @@
 const express = require('express');
 const sequelize = require('./config/database.js');
 const User = require('./models/user.js');
+const authRoutes = require('./routes/authRoutes.js');
 
 const app = express();
 
 app.use(express.json());
+app.use('/api/auth', authRoutes);
 
 app.get('/api/health', (req, res) => {
     res.json({ 
